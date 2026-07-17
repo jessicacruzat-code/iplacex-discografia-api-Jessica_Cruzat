@@ -3,13 +3,14 @@ FROM gradle:8.8-jdk21 AS builder
 
 WORKDIR /app
 
-COPY ./build.gradle .
-COPY ./settings.gradle .
+COPY build.gradle settings.gradle ./
 
-RUN gradle build --no-daemon
+COPY src ./src
+
+RUN gradle bootJar --no-daemon
 
 # ---------- Stage 2 : Ejecución ----------
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk-jammy
 
 WORKDIR /app
 
