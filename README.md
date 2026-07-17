@@ -1,4 +1,4 @@
-iplacex-discografica-api-jessica_cruzat
+iplacex-discografica-api-jessica_cruzat.
 
 # API REST Spring para administración de artista y disco de IPLACEX
 
