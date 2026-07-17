@@ -1,5 +1,5 @@
 # ---------- Stage 1 : Compilación ----------
-FROM gradle:-jdk21 as builder
+FROM gradle:8.8-jdk21 AS builder
 
 WORKDIR /app
 
