@@ -1,19 +1,20 @@
 # ---------- Stage 1 : Compilación ----------
-FROM gradle:8.8-jdk21 AS builder
+FROM gradle:-jdk21 as builder
 
 WORKDIR /app
 
-COPY . .
+COPY ./buil.gradle .
+COPY ./settings.gradle .
 
-RUN gradle clean build -x test
+RUN gradle build --no-daemon
 
 # ---------- Stage 2 : Ejecución ----------
 FROM openjdk:21-jdk-slim
 
 WORKDIR /app
 
-COPY --from=builder /app/build/libs/discografia-1.jar app.jar
+COPY --from=builder /app/build/libs/*.jar discografia-1.jar
 
-EXPOSE 8080
+EXPOSE 443
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","discografia-1.jar"]
